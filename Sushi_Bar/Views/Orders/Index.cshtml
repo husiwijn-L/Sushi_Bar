@@ -4,11 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1>Вы находитесь в заказах ❤️</h1>
+ 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить новое</a> 
 </p>
+
+<form asp-controller="Orders" asp-action="Index">
+    <p>
+        <label>Название: <input type="text" name="SearchString" /></label>
+        <input type="submit" value="Фильтр" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -37,9 +45,9 @@
                 @Html.DisplayFor(modelItem => item.DeliveryAddress)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>
 }

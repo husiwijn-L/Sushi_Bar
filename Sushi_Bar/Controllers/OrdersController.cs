@@ -19,9 +19,22 @@ namespace Sushi_Bar.Controllers
         }
 
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Order.ToListAsync());
+            if (_context.Order == null)
+            {
+                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+            }
+
+            var movies = from m in _context.Order
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.CustomerName!.ToUpper().Contains(searchString.ToUpper()));
+            }
+             
+            return View(await movies.ToListAsync());
         }
 
         // GET: Orders/Details/5
